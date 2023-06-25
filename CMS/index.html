@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canteen Management System</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <h1>Canteen Management System</h1>
+  <form id="orderForm">
+    <label for="itemName">Item Name:</label>
+    <select id="itemName" name="itemName">
+      <option value="Alu Paratha">Alu Paratha - Rs 50</option>
+      <option value="Chole Bhature">Chole Bhature - Rs 100</option>
+      <option value="Dahi Puri">Dahi Puri - Rs 50</option>
+      <option value="Dosa">Dosa - Rs 50</option>
+      <option value="Idle">Idle - Rs 30</option>
+    </select>
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity">
+    <button type="submit">Add Item</button>
+  </form>
+  
+  <h2>Order Details</h2>
+  <table id="orderTable">
+    <tr>
+      <th>Item Name</th>
+      <th>Quantity</th>
+      <th>Price(per item)</th>
+    </tr>
+  </table>
+  <h3>Total: <span id="total"></span></h3>
+  <button id="payButton">Order</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
