@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Order Details</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Token Number</th>
+        <th>Table Number</th>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Status</th>
+        
+      </tr>
+    </thead>
+    <tbody id="orderItems"></tbody>
+  </table>
+
+  <script>
+    // Get the order ID from the query string
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('orderId');
+
+    // Fetch order items from the server
+    fetch(`/orderItems?orderId=${orderId}`)
+      .then(response => response.json())
+      .then(orderItems => {
+        const orderItemsContainer = document.getElementById('orderItems');
+
+        orderItems.forEach(item => {
+          const row = document.createElement('tr');
+
+          const itemNameCell = document.createElement('td');
+          itemNameCell.textContent = item.itemName;
+          row.appendChild(itemNameCell);
+
+          const quantityCell = document.createElement('td');
+          quantityCell.textContent = item.quantity;
+          row.appendChild(quantityCell);
+
+          const priceCell = document.createElement('td');
+          priceCell.textContent = item.price;
+          row.appendChild(priceCell);
+
+          orderItemsContainer.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching order items: ', error);
+      });
+  </script>
+</body>
+</html>
